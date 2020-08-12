@@ -12,3 +12,7 @@ commands:
       description: Clears you or a given player's inventory.
       aliases:
         - clear
+  cleareffects:
+    description: Clears you or a given player's inventory.
+    aliases:
+      - clear
