@@ -2,3 +2,8 @@ name: Amore
 main: space.minota.amore.Main
 version: 0.0.1
 author: Minota
+commands:
+  heal:
+      description: Heals you or a given player.
+  feed:
+      description: Feeds you or a given player.
