@@ -1,6 +1,5 @@
 package space.minota.amore.commands.essentials
 
-import com.google.common.base.Optional.absent
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -12,11 +11,13 @@ import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
+import space.minota.amore.Main
+
 class ClearInventoryCommand : CommandExecutor {
 
     override fun onCommand(sender: CommandSender, cmd: Command, lbl: String, args: Array<String>): Boolean {
         if (!sender.hasPermission("uhc.command.ci")) {
-            sender.sendMessage("§8[§4UHC§8]§7 You do not have permission to use this command.")
+            sender.sendMessage("${Main.prefix} You do not have permission to use this command.")
             return false;
         }
         if (args.isEmpty()) {
@@ -36,7 +37,7 @@ class ClearInventoryCommand : CommandExecutor {
                 openInventory.topInventory.clear()
             }
 
-            player.sendMessage("§8[§4UHC§8]§7 You've cleared your own inventory.")
+            player.sendMessage("${Main.prefix} You've cleared your own inventory.")
         } else {
             if (args[0] == "*") {
                 for (online in ArrayList(Bukkit.getServer().onlinePlayers)) {
@@ -54,9 +55,9 @@ class ClearInventoryCommand : CommandExecutor {
                     if (openInventory.type == InventoryType.CRAFTING) {
                         openInventory.topInventory.clear()
                     }
-                    online.sendMessage("§8[§4UHC§8]§7 Your inventory has been cleared by §c${sender.name}§7.")
+                    online.sendMessage("${Main.prefix} Your inventory has been cleared by §c${sender.name}§7.")
                 }
-                sender.sendMessage("§8[§4UHC§8]§7 You've cleared all players' inventories.")
+                sender.sendMessage("${Main.prefix} You've cleared all players' inventories.")
                 return true;
             } else {
                 val target = Bukkit.getServer().getPlayer(args[0])
@@ -77,8 +78,8 @@ class ClearInventoryCommand : CommandExecutor {
                 if (openInventory.type == InventoryType.CRAFTING) {
                     openInventory.topInventory.clear()
                 }
-                target.sendMessage("§8[§4UHC§8]§7 Your inventory has been cleared by §c${sender.name}§7.")
-                sender.sendMessage("§8[§4UHC§8]§7 Cleared §c${target.name}'s§7 inventory.")
+                target.sendMessage("${Main.prefix} Your inventory has been cleared by §c${sender.name}§7.")
+                sender.sendMessage("${Main.prefix} Cleared §c${target.name}'s§7 inventory.")
                 return true;
             }
         }
