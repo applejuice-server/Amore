@@ -1,9 +1,14 @@
 name: Amore
 main: space.minota.amore.Main
 version: 0.0.1
+description: Xestra's main plugin core.
 author: Minota
 commands:
   heal:
       description: Heals you or a given player.
   feed:
       description: Feeds you or a given player.
+  ci:
+      description: Clears you or a given player's inventory.
+      aliases:
+        - clear

@@ -24,7 +24,7 @@ class HealCommand : CommandExecutor {
             if (args[0] == "*") {
                 for (online in ArrayList(Bukkit.getServer().onlinePlayers)) {
                     online.health = 20.0
-                    online.sendMessage("§8[§4UHC§8]§7 You have been healed by §c${sender.name}§7..")
+                    online.sendMessage("§8[§4UHC§8]§7 You have been healed by §c${sender.name}§7.")
                 }
                 sender.sendMessage("§8[§4UHC§8]§7 You've healed all players.")
                 return true;
@@ -35,6 +35,7 @@ class HealCommand : CommandExecutor {
                 }
                 target.health = 20.0
                 target.sendMessage("§8[§4UHC§8]§7 You've been healed by §c${sender.name}§7.")
+                sender.sendMessage("§8[§4UHC§8]§7 Healed §c${target.name}§7.")
                 return true;
             }
         }

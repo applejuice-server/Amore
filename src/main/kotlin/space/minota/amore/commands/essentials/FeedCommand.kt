@@ -24,7 +24,7 @@ class FeedCommand : CommandExecutor {
             if (args[0] == "*") {
                 for (online in ArrayList(Bukkit.getServer().onlinePlayers)) {
                     online.foodLevel = 20
-                    online.sendMessage("§8[§4UHC§8]§7 You have been fed by §c${sender.name}§7..")
+                    online.sendMessage("§8[§4UHC§8]§7 You have been fed by §c${sender.name}§7.")
                 }
                 sender.sendMessage("§8[§4UHC§8]§7 You've fed all players.")
                 return true;
@@ -35,6 +35,7 @@ class FeedCommand : CommandExecutor {
                 }
                 target.foodLevel = 20
                 target.sendMessage("§8[§4UHC§8]§7 You've been fed by §c${sender.name}§7.")
+                sender.sendMessage("§8[§4UHC§8]§7 Fed §c${target.name}§7.")
                 return true;
             }
         }
