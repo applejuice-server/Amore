@@ -39,8 +39,6 @@ class HealCommand : CommandExecutor {
                 return true;
             }
         }
-
-        return true;
     }
 
 }

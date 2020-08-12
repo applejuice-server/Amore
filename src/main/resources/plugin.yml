@@ -6,23 +6,27 @@ author: Minota
 commands:
   heal:
       description: Heals you or a given player.
-      usage: /<command> [player|*]
   feed:
       description: Feeds you or a given player.
-      usage: /<command> [player|*]
   ci:
       description: Clears you or a given player's inventory.
-      usage: /<command> [player|*]
       aliases:
         - clear
   cleareffects:
-    description: Clears you or a given player's inventory.
-    usage: /<command> [player|*]
+    description: Clears you or a given player's potion effects.
     aliases:
-      - clear
+      - ce
   fly:
     description: Toggles you or a given player's flight.
+  gm:
+    description: Changes you or a provided player's gamemode.
   gamemode:
-    description: Change player gamemode.
-    usage: /<command> <survival|creative|adventure|spectator> [player]
-    aliases: [gms, gmsp, gmc, gma, gm]
+    description: Changes you or a provided player's gamemode.
+  gmsp:
+    description: Changes you or a provided player's gamemode to Spectator.
+  gmc:
+    description: Changes you or a provided player's gamemode to Creative.
+  gms:
+    description: Changes you or a provided player's gamemode to Survival.
+  gma:
+    description: Changes you or a provided player's gamemode to Adventure.

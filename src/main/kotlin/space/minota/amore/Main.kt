@@ -34,7 +34,12 @@ class Main : JavaPlugin() {
         getCommand("ci").executor = ClearInventoryCommand()
         getCommand("cleareffects").executor = ClearPotionEffectsCommand()
         getCommand("fly").executor = FlyCommand()
+        getCommand("gm").executor = GamemodeCommand()
         getCommand("gamemode").executor = GamemodeCommand()
+        getCommand("gma").executor = GamemodeCommand()
+        getCommand("gms").executor = GamemodeCommand()
+        getCommand("gmsp").executor = GamemodeCommand()
+        getCommand("gmc").executor = GamemodeCommand()
     }
 
     override fun onDisable() {

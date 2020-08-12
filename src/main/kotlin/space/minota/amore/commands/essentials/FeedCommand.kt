@@ -39,8 +39,6 @@ class FeedCommand : CommandExecutor {
                 return true;
             }
         }
-
-        return true;
     }
 
 }

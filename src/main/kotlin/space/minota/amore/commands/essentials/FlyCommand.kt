@@ -18,8 +18,8 @@ class FlyCommand : CommandExecutor {
         if (args.isEmpty()) {
             val player = sender as Player
             if (player.allowFlight == false) {
-                player.isFlying = true
                 player.allowFlight = true
+                player.isFlying = true
                 player.sendMessage("§8[§4UHC§8]§7 You have enabled flight for yourself.");
             } else {
                 player.isFlying = false
@@ -33,21 +33,18 @@ class FlyCommand : CommandExecutor {
             if (target == null) {
                 sender.sendMessage("${ChatColor.RED}That player is not online or has never logged onto the server.")
             }
-            if (target.allowFlight == false) {
-                target.isFlying = true
+            if (!target.allowFlight) {
                 target.allowFlight = true
+                target.isFlying = true
                 target.sendMessage("§8[§4UHC§8]§7 Your flight has been enabled by §c${sender.name}§7.");
                 sender.sendMessage("§8[§4UHC§8]§7 Enabled §c${target.name}'s§7 flight.")
             } else {
-                target.isFlying = false
                 target.allowFlight = false
+                target.isFlying = false
                 target.sendMessage("§8[§4UHC§8]§7 Your flight has been disabled by §c${sender.name}§7.");
                 sender.sendMessage("§8[§4UHC§8]§7 Disabled §c${target.name}'s§7 flight.")
             }
             return true;
         }
-
-        return true;
     }
-
 }

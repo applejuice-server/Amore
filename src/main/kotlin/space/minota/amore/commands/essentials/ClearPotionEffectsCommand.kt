@@ -49,7 +49,5 @@ class ClearPotionEffectsCommand : CommandExecutor {
                 return true;
             }
         }
-
-        return true;
     }
 }
