@@ -6,13 +6,23 @@ author: Minota
 commands:
   heal:
       description: Heals you or a given player.
+      usage: /<command> [player|*]
   feed:
       description: Feeds you or a given player.
+      usage: /<command> [player|*]
   ci:
       description: Clears you or a given player's inventory.
+      usage: /<command> [player|*]
       aliases:
         - clear
   cleareffects:
     description: Clears you or a given player's inventory.
+    usage: /<command> [player|*]
     aliases:
       - clear
+  fly:
+    description: Toggles you or a given player's flight.
+  gamemode:
+    description: Change player gamemode.
+    usage: /<command> <survival|creative|adventure|spectator> [player]
+    aliases: [gms, gmsp, gmc, gma, gm]

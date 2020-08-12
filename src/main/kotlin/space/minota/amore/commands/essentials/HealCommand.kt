@@ -18,7 +18,7 @@ class HealCommand : CommandExecutor {
         if (args.isEmpty()) {
             val player = sender as Player
             player.health = 20.0
-            player.sendMessage("§8[§4UHC§8]§7 You have healed yourself..");
+            player.sendMessage("§8[§4UHC§8]§7 You have healed yourself.");
             return true;
         } else {
             if (args[0] == "*") {

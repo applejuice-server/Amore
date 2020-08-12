@@ -18,7 +18,7 @@ class FeedCommand : CommandExecutor {
         if (args.isEmpty()) {
             val player = sender as Player
             player.foodLevel = 20
-            player.sendMessage("§8[§4UHC§8]§7 You have fed yourself..");
+            player.sendMessage("§8[§4UHC§8]§7 You have fed yourself.");
             return true;
         } else {
             if (args[0] == "*") {

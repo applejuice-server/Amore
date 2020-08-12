@@ -1,12 +1,8 @@
 package space.minota.amore
 
 import org.bukkit.plugin.java.JavaPlugin
+import space.minota.amore.commands.essentials.*
 import space.minota.amore.utils.Settings
-
-import space.minota.amore.commands.essentials.ClearInventoryCommand
-import space.minota.amore.commands.essentials.ClearPotionEffectsCommand
-import space.minota.amore.commands.essentials.FeedCommand
-import space.minota.amore.commands.essentials.HealCommand
 
 
 class Main : JavaPlugin() {
@@ -37,6 +33,8 @@ class Main : JavaPlugin() {
         getCommand("feed").executor = FeedCommand()
         getCommand("ci").executor = ClearInventoryCommand()
         getCommand("cleareffects").executor = ClearPotionEffectsCommand()
+        getCommand("fly").executor = FlyCommand()
+        getCommand("gamemode").executor = GamemodeCommand()
     }
 
     override fun onDisable() {
