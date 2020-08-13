@@ -3,6 +3,7 @@ main: space.minota.amore.Main
 version: 0.0.1
 description: Xestra's main plugin core.
 author: Minota
+soft-depend: Vault
 commands:
   heal:
       description: Heals you or a given player.
@@ -30,3 +31,10 @@ commands:
     description: Changes you or a provided player's gamemode to Survival.
   gma:
     description: Changes you or a provided player's gamemode to Adventure.
+  msg:
+    aliases:
+      - message
+      - tell
+      - whisper
+      - w
+    description: Privately message a user.

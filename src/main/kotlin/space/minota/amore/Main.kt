@@ -3,7 +3,10 @@ package space.minota.amore
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+
 import space.minota.amore.commands.essentials.*
+import space.minota.amore.commands.player.MessageCommand
+
 import space.minota.amore.utils.PlayersUtil
 import space.minota.amore.utils.Settings
 
@@ -14,8 +17,8 @@ class Main : JavaPlugin() {
 
     // Variable declarations (to use in chat messages)
     companion object {
-        val prefix = "§8[§4UHC§8]§7"
-        val line = "§8§m-------------------------------------"
+        const val prefix = "§8[§4UHC§8]§7"
+        const val line = "§8§m-------------------------------------"
     }
 
     // Main funcs (funky)
@@ -45,11 +48,14 @@ class Main : JavaPlugin() {
         getCommand("gms").executor = GamemodeCommand()
         getCommand("gmsp").executor = GamemodeCommand()
         getCommand("gmc").executor = GamemodeCommand()
+        getCommand("msg").executor = MessageCommand()
     }
 
     override fun onDisable() {
         logger.info("Amore disabled!")
     }
+
+    /*
 
     fun start() {
         Bukkit.getServer().scheduler.scheduleSyncRepeatingTask(this /* ? */, Runnable breakout@{
@@ -68,5 +74,8 @@ class Main : JavaPlugin() {
         return Bukkit.getPlayer(Settings.instance.data?.getString("game.host"))
             ?: return PlayersUtil.getPlayers()[0]
     }
+
+
+     */
 
 }
