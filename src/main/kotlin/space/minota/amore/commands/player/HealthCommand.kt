@@ -1,6 +1,7 @@
 package space.minota.amore.commands.player
 
 import net.minecraft.server.v1_8_R3.EntityLiving
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -19,8 +20,17 @@ class HealthCommand : CommandExecutor {
                 val health = floor(player.health / 2 * 10 + el.absorptionHearts / 2 * 10)
                 val color = HealthChatColorer.returnHealth(health)
                 sender.sendMessage("${Main.prefix} ${ChatColor.WHITE}${player.displayName}${ChatColor.GRAY} is at ${color}${health}%${ChatColor.GRAY}.")
-            return true
+                return true
+            } else {
+                val target = Bukkit.getServer().getPlayer(args[0])
+                if (target == null) {
+                    sender.sendMessage("${ChatColor.RED}That player is not online or has never logged onto the server.")
+                }
+                val el: EntityLiving = (target as CraftPlayer).handle
+                val health = floor(target.health / 2 * 10 + el.absorptionHearts / 2 * 10)
+                val color = HealthChatColorer.returnHealth(health)
+                sender.sendMessage("${Main.prefix} ${ChatColor.WHITE}${target.displayName}${ChatColor.GRAY} is at ${color}${health}%${ChatColor.GRAY}.")
+                return true
             }
-        return true
     }
 }
