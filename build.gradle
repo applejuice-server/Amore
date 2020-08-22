@@ -8,12 +8,12 @@ group 'space.minota.Amore'
 version '1.0-SNAPSHOT'
 
 repositories {
+    jcenter()
     mavenCentral()
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url = 'https://repo.dmulloy2.net/nexus/repository/public/' }
     mavenLocal()
-    jcenter()
 }
 
 dependencies {
@@ -21,9 +21,9 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     runtime group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.4.0-rc'
-    compile 'net.dv8tion:JDA:VERSION'
+    compile 'net.dv8tion:JDA:4.2.0_196'
     compileOnly "org.bukkit:craftbukkit:1.8.8-R0.1-SNAPSHOT"
-    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0";
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
 }
 
 compileKotlin {
