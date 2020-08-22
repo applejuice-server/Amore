@@ -3,6 +3,7 @@ package space.minota.amore
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import space.minota.amore.commands.essentials.*
+import space.minota.amore.commands.player.HealthCommand
 import space.minota.amore.commands.player.MessageCommand
 import space.minota.amore.features.TabHealthFeature
 import space.minota.amore.listeners.Players
@@ -49,6 +50,8 @@ class Main : JavaPlugin() {
         getCommand("gmsp").executor = GamemodeCommand()
         getCommand("gmc").executor = GamemodeCommand()
         getCommand("msg").executor = MessageCommand()
+        getCommand("health").executor = HealthCommand()
+        getCommand("whitelist").executor = WhitelistCommand()
 
         TabHealthFeature(this)
 

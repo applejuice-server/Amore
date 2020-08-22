@@ -1,21 +1,28 @@
 package space.minota.amore.utils
 
-class HealthChatColorer(health: Double) {
+class HealthChatColorer {
     companion object {
-        fun returnHealth(health: Int): String {
+        fun returnHealth(health: Double): String {
             var c = ""
-            if (health == 0) {
-                c = "§8"
-            } else if (health > 35) {
-                c = "§c"
-            } else if (health > 50) {
-                c = "§e"
-            } else if (health > 75) {
-                c = "§6"
-            } else if (health > 80) {
-                c = "§a"
-            } else if (health > 90) {
-                c = "§2"
+            when {
+                health > 90 -> {
+                    c = "§2"
+                }
+                health > 80 -> {
+                    c = "§a"
+                }
+                health > 75 -> {
+                    c = "§6"
+                }
+                health > 50 -> {
+                    c = "§e"
+                }
+                health > 35 -> {
+                    c = "§c"
+                }
+                health.equals(0) -> {
+                    c = "§8"
+                }
             }
             return c
         }

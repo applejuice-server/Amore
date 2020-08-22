@@ -31,6 +31,14 @@ commands:
     description: Changes you or a provided player's gamemode to Survival.
   gma:
     description: Changes you or a provided player's gamemode to Adventure.
+  health:
+    description: Gets the health of a given user.
+    aliases:
+      - h
+  whitelist:
+    description: Whitelist settings/config.
+    aliases:
+      - wl
   msg:
     aliases:
       - message
