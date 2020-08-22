@@ -6,6 +6,7 @@ import space.minota.amore.commands.essentials.*
 import space.minota.amore.commands.player.MessageCommand
 import space.minota.amore.features.TabHealthFeature
 import space.minota.amore.listeners.Players
+import space.minota.amore.utils.GameState
 import space.minota.amore.utils.Settings
 
 
@@ -16,7 +17,7 @@ class Main : JavaPlugin() {
     // Variable declarations (to use in chat messages)
     companion object {
         const val prefix = "§8[§4UHC§8]§7"
-        //const val line = "§8§m-------------------------------------"
+        const val line = "§8§m-------------------------------------"
     }
 
     // Main funcs (funky)
@@ -56,6 +57,8 @@ class Main : JavaPlugin() {
 
     override fun onDisable() {
         logger.info("Amore disabled!")
+        settings.getData()?.set("game.state", GameState.getState()?.name)
+        settings.saveData()
     }
 
     /*

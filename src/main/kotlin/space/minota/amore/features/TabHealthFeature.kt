@@ -36,7 +36,7 @@ class TabHealthFeature(plugin: Plugin) : BukkitRunnable() {
 
     override fun run() {
         for (player in Bukkit.getOnlinePlayers()) {
-            val health = floor(player.health / 20 * 100 + (player as CraftPlayer).handle.absorptionHearts).toInt()
+            val health = floor(player.health / 20 * 100 + ((player as CraftPlayer).handle.absorptionHearts / 2) * 10).toInt()
             name.getScore(player.getName()).score = health
             tab.getScore(player.getName()).score = health
         }

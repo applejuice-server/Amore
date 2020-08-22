@@ -17,15 +17,31 @@ class Settings private constructor() {
     var data: FileConfiguration? = null
     private var dfile: File? = null
 
+    companion object {
+        val instance = Settings()
+        @JvmName("getInstance1")
+        fun getInstance(): Settings? {
+            return instance
+        }
+
+    }
+
+
+
+    @JvmName("getData1")
+    fun getData(): FileConfiguration? {
+        return data
+    }
+
     /**
      * Sets the settings manager up and creates missing files.
      * @param p the main class.
      */
     fun setup(p: Plugin) {
-        if (!p.getDataFolder().exists()) {
-            p.getDataFolder().mkdir()
+        if (!p.dataFolder.exists()) {
+            p.dataFolder.mkdir()
         }
-        dfile = File(p.getDataFolder(), "data.yml")
+        dfile = File(p.dataFolder, "data.yml")
         if (!dfile!!.exists()) {
             try {
                 dfile!!.createNewFile()
@@ -35,6 +51,7 @@ class Settings private constructor() {
         }
         data = YamlConfiguration.loadConfiguration(dfile)
     }
+
 
     /**
      * Saves the data config.
@@ -54,7 +71,4 @@ class Settings private constructor() {
         data = YamlConfiguration.loadConfiguration(dfile)
     }
 
-    companion object {
-        val instance = Settings()
-    }
 }
