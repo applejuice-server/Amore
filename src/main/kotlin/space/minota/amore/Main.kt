@@ -9,6 +9,7 @@ import org.bukkit.scoreboard.Objective
 import org.bukkit.scoreboard.Scoreboard
 import space.minota.amore.commands.essentials.*
 import space.minota.amore.commands.player.MessageCommand
+import space.minota.amore.listeners.Players
 import space.minota.amore.utils.Settings
 import kotlin.math.floor
 
@@ -81,6 +82,8 @@ class Main : JavaPlugin() {
         getCommand("gmsp").executor = GamemodeCommand()
         getCommand("gmc").executor = GamemodeCommand()
         getCommand("msg").executor = MessageCommand()
+
+        Bukkit.getServer().pluginManager.registerEvents(Players(), this)
     }
 
     override fun onDisable() {
