@@ -23,10 +23,12 @@ class FlyCommand : CommandExecutor {
                 player.allowFlight = true
                 player.isFlying = true
                 player.sendMessage("${Main.prefix} You have enabled flight for yourself.");
+                return true
             } else {
                 player.isFlying = false
                 player.allowFlight = false
                 player.sendMessage("${Main.prefix} You have disabled flight for yourself.");
+                return true
             }
 
             return true;
@@ -34,6 +36,7 @@ class FlyCommand : CommandExecutor {
             val target = Bukkit.getServer().getPlayer(args[0])
             if (target == null) {
                 sender.sendMessage("${ChatColor.RED}That player is not online or has never logged onto the server.")
+                return false
             }
             if (!target.allowFlight) {
                 target.allowFlight = true
@@ -46,7 +49,7 @@ class FlyCommand : CommandExecutor {
                 target.sendMessage("${Main.prefix} Your flight has been disabled by §c${sender.name}§7.");
                 sender.sendMessage("${Main.prefix} Disabled §c${target.name}'s§7 flight.")
             }
-            return true;
+            return true
         }
     }
 }
