@@ -19,7 +19,7 @@ class FlyCommand : CommandExecutor {
         }
         if (args.isEmpty()) {
             val player = sender as Player
-            if (player.allowFlight == false) {
+            if (!player.allowFlight) {
                 player.allowFlight = true
                 player.isFlying = true
                 player.sendMessage("${Main.prefix} You have enabled flight for yourself.");
