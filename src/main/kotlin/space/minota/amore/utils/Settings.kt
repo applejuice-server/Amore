@@ -15,23 +15,8 @@ class Settings private constructor() {
      * @return the config.
      */
     var data: FileConfiguration? = null
+        private set
     private var dfile: File? = null
-
-    companion object {
-        val instance = Settings()
-        @JvmName("getInstance1")
-        fun getInstance(): Settings? {
-            return instance
-        }
-
-    }
-
-
-
-    @JvmName("getData1")
-    fun getData(): FileConfiguration? {
-        return data
-    }
 
     /**
      * Sets the settings manager up and creates missing files.
@@ -52,7 +37,6 @@ class Settings private constructor() {
         data = YamlConfiguration.loadConfiguration(dfile)
     }
 
-
     /**
      * Saves the data config.
      */
@@ -71,4 +55,7 @@ class Settings private constructor() {
         data = YamlConfiguration.loadConfiguration(dfile)
     }
 
+    companion object {
+        val instance = Settings()
+    }
 }

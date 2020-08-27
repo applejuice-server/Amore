@@ -6,6 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin
 import space.minota.amore.commands.essentials.*
 import space.minota.amore.commands.player.HealthCommand
 import space.minota.amore.commands.player.MessageCommand
+import space.minota.amore.commands.player.TeamCommand
+import space.minota.amore.features.AntiNotchApples
 import space.minota.amore.features.GoldenHeads
 import space.minota.amore.features.TabHealthFeature
 import space.minota.amore.listeners.Chat
@@ -26,6 +28,9 @@ class Main : JavaPlugin() {
         const val line = "§8§m-------------------------------------"
         var plugin: Main? = null
         var absorption = false
+        var notchapples = false
+        var ffa = false
+        var teamSize = 0
         var res: Recipe? = null
     }
 
@@ -33,16 +38,16 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         settings.setup(this)
 
-        absorption = settings.data?.getBoolean("game.options.absorption")!!
+        absorption = settings.data!!.getBoolean("game.options.absorption")
+        notchapples = settings.data!!.getBoolean("game.options.notches")
+        ffa = settings.data!!.getBoolean("game.ffa")
+        teamSize = settings.data!!.getInt("game.teamsize")
 
-        try {
-            if (settings.data?.contains("game.state")!!) {
-                settings.data?.set("game.state", settings.data?.getString("game.state"))
-            } else {
-                settings.data?.set("game.state", "LOBBY")
-            }
-        } catch (e: Exception) {
-            settings.data?.set("game.state", "LOBBY")
+
+        if (settings.data!!.contains("game.state")) {
+            GameState.setState(GameState.valueOf(settings.data!!.getString("game.state")))
+        } else {
+            GameState.setState(GameState.LOBBY)
         }
 
 
@@ -64,6 +69,7 @@ class Main : JavaPlugin() {
         getCommand("gamemode").executor = GamemodeCommand()
         getCommand("gma").executor = GamemodeCommand()
         getCommand("gms").executor = GamemodeCommand()
+        getCommand("team").executor = TeamCommand()
         getCommand("gmsp").executor = GamemodeCommand()
         getCommand("gmc").executor = GamemodeCommand()
         getCommand("msg").executor = MessageCommand()
@@ -81,11 +87,15 @@ class Main : JavaPlugin() {
     private fun registerFeatures() {
         TabHealthFeature(this)
         GoldenHeads()
+        if (!notchapples) {
+            AntiNotchApples()
+        }
+        Teams.manager.setupTeams()
     }
 
     override fun onDisable() {
         logger.info("Amore disabled!")
-        settings.getData()?.set("game.state", GameState.getState()?.name)
+        settings.data!!.set("game.state", GameState.valueOf(settings.data!!.getString("game.state")))
         settings.saveData()
     }
 
