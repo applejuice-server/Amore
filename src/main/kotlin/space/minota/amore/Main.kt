@@ -10,10 +10,7 @@ import space.minota.amore.commands.player.TeamCommand
 import space.minota.amore.features.AntiNotchApples
 import space.minota.amore.features.GoldenHeads
 import space.minota.amore.features.TabHealthFeature
-import space.minota.amore.listeners.Chat
-import space.minota.amore.listeners.Join
-import space.minota.amore.listeners.Players
-import space.minota.amore.listeners.Quit
+import space.minota.amore.listeners.*
 import space.minota.amore.utils.GameState
 import space.minota.amore.utils.Settings
 
@@ -81,6 +78,7 @@ class Main : JavaPlugin() {
         Bukkit.getServer().pluginManager.registerEvents(Players(), this)
         Bukkit.getServer().pluginManager.registerEvents(Chat(), this)
         Bukkit.getServer().pluginManager.registerEvents(Join(), this)
+        Bukkit.getServer().pluginManager.registerEvents(World(), this)
         Bukkit.getServer().pluginManager.registerEvents(Quit(), this)
     }
 
