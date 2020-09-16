@@ -25,6 +25,7 @@ class Main : JavaPlugin() {
         const val line = "§8§m-------------------------------------"
         var plugin: Main? = null
         var absorption = false
+        var goldenheads = false
         var notchapples = false
         var ffa = false
         var teamSize = 0
@@ -37,6 +38,7 @@ class Main : JavaPlugin() {
 
         absorption = settings.data!!.getBoolean("game.options.absorption")
         notchapples = settings.data!!.getBoolean("game.options.notches")
+        goldenheads = settings.data!!.getBoolean("game.options.goldenheads")
         ffa = settings.data!!.getBoolean("game.ffa")
         teamSize = settings.data!!.getInt("game.teamsize")
 
@@ -46,6 +48,19 @@ class Main : JavaPlugin() {
         } else {
             GameState.setState(GameState.LOBBY)
         }
+        if (settings.data!!.contains("game.ffa")) {
+            settings.data?.set("game.ffa", true)
+        }
+        if (settings.data!!.contains("game.teamsize")) {
+            settings.data?.set("game.teamsize", "FFA")
+        }
+        if (settings.data!!.contains("game.options.absorption")) {
+            settings.data?.set("game.options.absorption", true)
+        }
+        if (settings.data!!.contains("game.options.notchapples")) {
+            settings.data?.set("game.options.notchapples", true)
+        }
+
 
 
         logger.info("Amore enabled!")
@@ -84,7 +99,9 @@ class Main : JavaPlugin() {
 
     private fun registerFeatures() {
         TabHealthFeature(this)
-        GoldenHeads()
+        if (goldenheads) {
+            GoldenHeads()
+        }
         if (!notchapples) {
             AntiNotchApples()
         }

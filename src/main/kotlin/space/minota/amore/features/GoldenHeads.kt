@@ -18,8 +18,8 @@ class GoldenHeads {
         meta.displayName = ChatColor.GOLD.toString() + "Golden Head"
         meta.lore = listOf(ChatColor.DARK_PURPLE.toString() + "Some say consuming the head of a", ChatColor.DARK_PURPLE.toString() + "fallen foe strengthens the blood.")
         head.itemMeta = meta
-        val goldenhead: ShapedRecipe = ShapedRecipe(head).shape("@@@", "@*@", "@@@").setIngredient('@', Material.GOLD_INGOT).setIngredient('*', mater)
-        Bukkit.getServer().addRecipe(goldenhead)
-        Main.res = goldenhead
+        val goldenHead: ShapedRecipe = ShapedRecipe(head).shape("@@@", "@*@", "@@@").setIngredient('@', Material.GOLD_INGOT).setIngredient('*', mater)
+        Bukkit.getServer().addRecipe(goldenHead)
+        Main.res = goldenHead
     }
 }
