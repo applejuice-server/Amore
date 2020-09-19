@@ -14,7 +14,7 @@ enum class GameState {
             Settings.instance.saveData()
         }
 
-        private var currentState: GameState? = null
+        var currentState: GameState? = null
 
     }
 }

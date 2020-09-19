@@ -11,7 +11,7 @@ class Join : Listener {
     @EventHandler
     fun onPlayerJoin(e: PlayerJoinEvent) {
         val player = e.player
-        e.joinMessage = ChatColor.DARK_GRAY.toString() + "[" + ChatColor.DARK_GREEN + "+" + ChatColor.DARK_GRAY + "] " + ChatColor.GREEN + player.name
+        e.joinMessage = ChatColor.DARK_GRAY.toString() + "(" + ChatColor.DARK_GREEN + "+" + ChatColor.DARK_GRAY + ") " + ChatColor.GREEN + player.name
     }
 
 }

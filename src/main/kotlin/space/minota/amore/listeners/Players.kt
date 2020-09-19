@@ -1,6 +1,7 @@
 package space.minota.amore.listeners
 
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.SkullType
 import org.bukkit.block.Block
@@ -8,6 +9,7 @@ import org.bukkit.block.Skull
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntityRegainHealthEvent
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason
 import org.bukkit.event.entity.FoodLevelChangeEvent
@@ -47,6 +49,7 @@ class Players : Listener {
 
         val b: Block = player.location.add(0.0, 1.0, 0.0).block
         b.setData(0x1.toByte(), true)
+        player.sendTitle("${ChatColor.DARK_RED}${ChatColor.BOLD}YOU DIED!", event.deathMessage)
     }
 
     @EventHandler

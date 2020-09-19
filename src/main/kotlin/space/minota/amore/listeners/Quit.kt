@@ -11,7 +11,7 @@ class Quit : Listener {
     @EventHandler
     fun onPlayerQuit(e: PlayerQuitEvent) {
         val player = e.player
-        e.quitMessage = ChatColor.DARK_GRAY.toString() + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] " + ChatColor.RED + player.name
+        e.quitMessage = ChatColor.DARK_GRAY.toString() + "(" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + ") " + ChatColor.RED + player.name
     }
 
 }

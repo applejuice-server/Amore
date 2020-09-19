@@ -1,6 +1,5 @@
 package space.minota.amore.commands.player
 
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -12,6 +11,7 @@ import space.minota.amore.Teams
 import space.minota.amore.utils.GameState
 import space.minota.amore.utils.Settings
 import java.util.*
+
 
 class TeamCommand : CommandExecutor {
 
@@ -31,7 +31,8 @@ class TeamCommand : CommandExecutor {
 
         if (args.isEmpty()) {
             sender.sendMessage(Main.line)
-            sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team invite <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Creates and invites a player to your team.")
+            sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team create ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Creates a team.")
+            sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team invite <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Invites a player to your team.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team leave ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Leave your team.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team accept <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Accept a player's team invite.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team kick <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Kick a player from your team.")
@@ -45,44 +46,28 @@ class TeamCommand : CommandExecutor {
                 sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team size <size> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Set the size of teams.")
                 sender.sendMessage(Main.line)
             }
-        } else if (args[0] == "invite") {
+        } else if (args[0] == "create") {
             val player = sender as Player
-            if (args[1].isEmpty()) {
-                sender.sendMessage("${ChatColor.RED}You need a teammate to invite.")
-                return false
+            if (player.scoreboard.getPlayerTeam(player) != null) {
+                player.sendMessage("${ChatColor.RED}You are already on a team.")
+                return true
             }
-            val target = Bukkit.getServer().getPlayer(args[1])
-            if (target == null) {
-                sender.sendMessage("${ChatColor.RED}You need a valid teammate to invite.")
-                return false
+            if (GameState.valueOf(Settings.instance.data!!.getString("game.state")) !== GameState.LOBBY) {
+                player.sendMessage("${ChatColor.RED}You can't use this command at the moment.")
+                return true
             }
-            val playerTeam: Team = player.scoreboard.getPlayerTeam(player)
-            if (playerTeam == null) {
-                val oteams = ArrayList<Team>()
-                for (team in Teams.manager.getTeams()) {
-                    if (team.size == 0) {
-                        oteams.add(team)
-                    }
-                }
-                oteams[Random().nextInt(oteams.size)].addPlayer(player)
-                sender.sendMessage("${Main.prefix} You have created a team.")
-            }
-            val targetTeam: Team = player.scoreboard.getPlayerTeam(target)
-            if (targetTeam != null) {
-                sender.sendMessage("${ChatColor.RED} ${ChatColor.WHITE}${target.name}${ChatColor.GRAY} is already on a team.")
-                return false
-            }
-            for (players in playerTeam.players) {
-                if (players is Player) {
-                    players.sendMessage(Main.line)
-                    players.sendMessage("${Main.prefix} ${ChatColor.WHITE}${target.name}${ChatColor.GRAY} was invited to your team.")
-                    players.sendMessage(Main.line)
+            val oTeams = ArrayList<Team>()
+
+            for (team in Teams.manager.getTeams()) {
+                if (team.size == 0) {
+                    oTeams.add(team)
                 }
             }
-            invites[player]?.add(target)
-            target.sendMessage(Main.line)
-            target.sendMessage("${Main.prefix} You've been invited to join ${ChatColor.WHITE}${player.name}${ChatColor.GRAY}'s team, accept the invite using ${ChatColor.WHITE}/team accept ${player.name}${ChatColor.GRAY}!")
-            target.sendMessage(Main.line)
+
+            oTeams[Random().nextInt(oTeams.size)].addPlayer(player)
+            player.sendMessage("${Main.prefix} Team created! Use ${ChatColor.WHITE}/team invite <player>${ChatColor.GRAY} to invite a player.")
+        } else if (args[0] == "invite") {
+
         }
 
         return true

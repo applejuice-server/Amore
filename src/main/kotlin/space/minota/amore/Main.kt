@@ -41,13 +41,6 @@ class Main : JavaPlugin() {
 
         settings.setup(this)
 
-        absorption = settings.data!!.getBoolean("game.options.absorption")
-        notchapples = settings.data!!.getBoolean("game.options.notches")
-        goldenheads = settings.data!!.getBoolean("game.options.goldenheads")
-        ffa = settings.data!!.getBoolean("game.ffa")
-        teamSize = settings.data!!.getInt("game.teamsize")
-
-
         if (settings.data!!.contains("game.state")) {
             GameState.setState(GameState.valueOf(settings.data!!.getString("game.state")))
         } else {
@@ -65,6 +58,13 @@ class Main : JavaPlugin() {
         if (settings.data!!.contains("game.options.notchapples")) {
             settings.data?.set("game.options.notchapples", true)
         }
+
+        absorption = settings.data!!.getBoolean("game.options.absorption")
+        notchapples = settings.data!!.getBoolean("game.options.notches")
+        goldenheads = settings.data!!.getBoolean("game.options.goldenheads")
+        ffa = settings.data!!.getBoolean("game.ffa")
+        teamSize = settings.data!!.getInt("game.teamsize")
+
 
 
 
