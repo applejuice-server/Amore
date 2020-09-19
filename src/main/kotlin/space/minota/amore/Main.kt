@@ -1,5 +1,8 @@
 package space.minota.amore
 
+import net.dv8tion.jda.api.JDABuilder
+import net.dv8tion.jda.api.entities.Activity
+import net.dv8tion.jda.api.requests.GatewayIntent
 import org.bukkit.Bukkit
 import org.bukkit.inventory.Recipe
 import org.bukkit.plugin.java.JavaPlugin
@@ -13,6 +16,7 @@ import space.minota.amore.features.TabHealthFeature
 import space.minota.amore.listeners.*
 import space.minota.amore.utils.GameState
 import space.minota.amore.utils.Settings
+import javax.security.auth.login.LoginException
 
 
 class Main : JavaPlugin() {
@@ -34,6 +38,7 @@ class Main : JavaPlugin() {
 
     // Main funcs (funky)
     override fun onEnable() {
+
         settings.setup(this)
 
         absorption = settings.data!!.getBoolean("game.options.absorption")
