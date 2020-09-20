@@ -12,7 +12,7 @@ import space.minota.amore.Main
 import space.minota.amore.Teams
 import space.minota.amore.utils.GameState
 import space.minota.amore.utils.Settings
-import sun.audio.AudioPlayer
+import sun.audio.AudioPlayer.player
 import java.util.*
 
 
@@ -39,7 +39,6 @@ class TeamCommand : CommandExecutor {
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team invite <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Invites a player to your team.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team leave ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Leave your team.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team accept <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Accept a player's team invite.")
-            sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team kick <player> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Kick a player from your team.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/team list ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Brings a list of teams and their members.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/pm <message> ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Talk in team chat.")
             sender.sendMessage("${Main.prefix} ${ChatColor.GREEN}/pmc ${ChatColor.DARK_GRAY}-${ChatColor.WHITE} Send your coordinates.")
@@ -172,6 +171,67 @@ class TeamCommand : CommandExecutor {
             } else {
                 player.sendMessage("${ChatColor.RED}That player has not sent you a team invite.")
                 return false
+            }
+        } else if (args[0] == "management") {
+            if (!sender.hasPermission("uhc.command.team")) {
+                sender.sendMessage("${ChatColor.RED}You don't have permission to use this command.")
+                return false
+            }
+            if (args[1] != "on" || args[1] != "off") {
+                sender.sendMessage("${Main.prefix} Invalid usage: ${ChatColor.WHITE}/team management on/off")
+                return false
+            }
+            sender.sendMessage(Main.line)
+            if (args[1] == "on") {
+                Main.ffa = true
+                settings.data!!.set("game.ffa", true)
+                sender.sendMessage("${Main.prefix} ${ChatColor.GRAY}Team management has been set to ${ChatColor.WHITE}off${ChatColor.GRAY}.")
+            } else if (args[1] == "off") {
+                Main.ffa = false
+                settings.data!!.set("game.ffa", false)
+                sender.sendMessage("${Main.prefix} ${ChatColor.GRAY}Team management has been set to ${ChatColor.WHITE}on${ChatColor.GRAY}.")
+            }
+            settings.saveData()
+            sender.sendMessage(Main.line)
+        } else if (args[0] == "reset") {
+            if (!sender.hasPermission("uhc.command.team")) {
+                sender.sendMessage("${ChatColor.RED}You don't have permission to use this command.")
+                return false
+            }
+            val player = sender as Player
+            for (team in Teams.manager.getTeams()) {
+                for (p in team.players) {
+                    team.removePlayer(p)
+                }
+            }
+            player.sendMessage(Main.line)
+            player.sendMessage("${Main.prefix} You've reset all teams.")
+            player.sendMessage(Main.line)
+        } else if (args[0] == "leave") {
+            val player = sender as Player
+            val team = player.scoreboard.getPlayerTeam(player)
+            if (Main.ffa) {
+                player.sendMessage("${ChatColor.RED}You can't do this command at the moment.")
+                return true
+            }
+
+            if (GameState.currentState != GameState.LOBBY) {
+                player.sendMessage("${ChatColor.RED}You can't do this command at the moment.")
+                return true
+            }
+
+            if (team == null) {
+                player.sendMessage(ChatColor.RED.toString() + "You are not on a team.")
+                return true
+            }
+            team.removePlayer(player)
+            player.sendMessage("${Main.prefix} You left your team.")
+            for (players in team.players) {
+                if (players is Player) {
+                    players.sendMessage(Main.line)
+                    players.sendMessage("${Main.prefix}${ChatColor.WHITE}${player.name}${ChatColor.GRAY} left your team.")
+                    players.sendMessage(Main.line)
+                }
             }
         }
 
