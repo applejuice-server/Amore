@@ -31,6 +31,8 @@ commands:
     description: Changes you or a provided player's gamemode to Survival.
   gma:
     description: Changes you or a provided player's gamemode to Adventure.
+  pm:
+    description: Sends a message to your team.
   team:
     description: General team commands.
   health:

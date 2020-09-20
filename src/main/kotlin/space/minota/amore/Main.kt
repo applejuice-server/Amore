@@ -1,14 +1,12 @@
 package space.minota.amore
 
-import net.dv8tion.jda.api.JDABuilder
-import net.dv8tion.jda.api.entities.Activity
-import net.dv8tion.jda.api.requests.GatewayIntent
 import org.bukkit.Bukkit
 import org.bukkit.inventory.Recipe
 import org.bukkit.plugin.java.JavaPlugin
 import space.minota.amore.commands.essentials.*
 import space.minota.amore.commands.player.HealthCommand
 import space.minota.amore.commands.player.MessageCommand
+import space.minota.amore.commands.player.PMCommand
 import space.minota.amore.commands.player.TeamCommand
 import space.minota.amore.features.AntiNotchApples
 import space.minota.amore.features.GoldenHeads
@@ -16,7 +14,6 @@ import space.minota.amore.features.TabHealthFeature
 import space.minota.amore.listeners.*
 import space.minota.amore.utils.GameState
 import space.minota.amore.utils.Settings
-import javax.security.auth.login.LoginException
 
 
 class Main : JavaPlugin() {
@@ -26,6 +23,7 @@ class Main : JavaPlugin() {
     // Variable declarations (to use in chat messages)
     companion object {
         const val prefix = "§8[§4UHC§8]§7"
+        const val dash = "§8»"
         const val line = "§8§m-------------------------------------"
         var plugin: Main? = null
         var absorption = false
@@ -46,17 +44,20 @@ class Main : JavaPlugin() {
         } else {
             GameState.setState(GameState.LOBBY)
         }
-        if (settings.data!!.contains("game.ffa")) {
+        if (!settings.data!!.contains("game.ffa")) {
             settings.data!!.set("game.ffa", true)
         }
-        if (settings.data!!.contains("game.teamsize")) {
+        if (!settings.data!!.contains("game.teamsize")) {
             settings.data!!.set("game.teamsize", 1)
         }
-        if (settings.data!!.contains("game.options.absorption")) {
-            settings.data?.set("game.options.absorption", true)
+        if (!settings.data!!.contains("game.options.absorption")) {
+            settings.data!!.set("game.options.absorption", true)
         }
-        if (settings.data!!.contains("game.options.notchapples")) {
-            settings.data?.set("game.options.notchapples", true)
+        if (!settings.data!!.contains("game.options.notchapples")) {
+            settings.data!!.set("game.options.notchapples", true)
+        }
+        if (!settings.data!!.contains("game.options.goldenheads")) {
+            settings.data!!.set("game.options.goldenheads", true)
         }
 
         settings.saveData()
@@ -93,6 +94,7 @@ class Main : JavaPlugin() {
         getCommand("msg").executor = MessageCommand()
         getCommand("health").executor = HealthCommand()
         getCommand("whitelist").executor = WhitelistCommand()
+        getCommand("pm").executor = PMCommand()
     }
 
     private fun registerListeners() {
@@ -117,6 +119,12 @@ class Main : JavaPlugin() {
     override fun onDisable() {
         logger.info("Amore disabled!")
         settings.data!!.set("game.state", GameState.valueOf(settings.data!!.getString("game.state")))
+        settings.data!!.set("game.teamsize", settings.data!!.getInt("game.teamsize"))
+        settings.data!!.set("game.options.absorption", settings.data!!.getBoolean("game.options.absorption"))
+        settings.data!!.set("game.options.notchapples", settings.data!!.getBoolean("game.options.notchapples"))
+        settings.data!!.set("game.options.goldenheads", settings.data!!.getBoolean("game.options.goldenheads"))
+
+
         settings.saveData()
     }
 
