@@ -95,6 +95,7 @@ class Main : JavaPlugin() {
         getCommand("health").executor = HealthCommand()
         getCommand("whitelist").executor = WhitelistCommand()
         getCommand("pm").executor = PMCommand()
+        getCommand("pregen").executor = PMCommand()
     }
 
     private fun registerListeners() {

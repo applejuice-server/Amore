@@ -3,6 +3,7 @@ main: space.minota.amore.Main
 version: 0.0.1
 description: Xestra's main plugin core.
 author: Minota
+depends: [WorldBorder]
 soft-depend: [Vault, ProtocolLib]
 commands:
   heal:
@@ -43,6 +44,12 @@ commands:
     description: Whitelist settings/config.
     aliases:
       - wl
+  pregen:
+    description: Creates and pregenerates your world.
+    aliases:
+      - pregenerate
+      - createworld
+      - cw
   msg:
     aliases:
       - message
