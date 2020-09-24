@@ -67,9 +67,6 @@ class Main : JavaPlugin() {
         ffa = settings.data!!.getBoolean("game.ffa")
         teamSize = settings.data!!.getInt("game.teamsize")
 
-
-
-
         logger.info("Amore enabled!")
 
         registerCommands()
@@ -95,7 +92,7 @@ class Main : JavaPlugin() {
         getCommand("health").executor = HealthCommand()
         getCommand("whitelist").executor = WhitelistCommand()
         getCommand("pm").executor = PMCommand()
-        getCommand("pregen").executor = PMCommand()
+        getCommand("pregen").executor = PregenCommand()
     }
 
     private fun registerListeners() {

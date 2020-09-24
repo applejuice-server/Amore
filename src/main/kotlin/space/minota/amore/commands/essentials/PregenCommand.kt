@@ -4,11 +4,13 @@ import org.bukkit.*
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import com.wimbli.WorldBorder.Config
 import org.bukkit.plugin.java.JavaPlugin
 import space.minota.amore.Main
-import com.wimbli.WorldBorder.Config
 import space.minota.amore.utils.ActionBar
 import space.minota.amore.utils.PlayersUtil
+import kotlin.math.floor
+
 
 class PregenCommand : CommandExecutor {
 
@@ -55,16 +57,17 @@ class PregenCommand : CommandExecutor {
 
     private fun runActionBar() {
         Bukkit.getServer().scheduler.scheduleSyncRepeatingTask(JavaPlugin.getPlugin(Main::class.java) /* ? */, Runnable breakout@{
-            if (Config.fillTask == null) {
-                Bukkit.broadcastMessage("${Main.prefix} Pregeneration is now finished.")
-                return@breakout
-            } else {
+            if (Config.fillTask.valid()) {
                 val players = PlayersUtil.getPlayers()
                 for (player in players) {
-                    ActionBar.sendActionBarMessage(player, "${Main.prefix} Progress: ${ChatColor.GREEN}${Config.fillTask.percentageCompleted} ${Main.dash} ${ChatColor.GRAY}World: ${ChatColor.GREEN}${Config.fillTask.refWorld()}")
+                    ActionBar.sendActionBarMessage(player, "${Main.prefix} Progress: ${ChatColor.GREEN}${floor(Config.fillTask.percentageCompleted)}% ${Main.dash} ${ChatColor.GRAY}World: ${ChatColor.GREEN}${Config.fillTask.refWorld()}")
                 }
+            } else {
+                Bukkit.broadcastMessage("${Main.prefix} Pregeneration is now finished.")
+                return@breakout
             }
-        }, 0, 20)
+        }, 0, 1)
     }
+
 
 }
