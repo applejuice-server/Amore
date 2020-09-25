@@ -14,6 +14,8 @@ import kotlin.math.floor
 
 class PregenCommand : CommandExecutor {
 
+    private val settings: Settings = Settings.instance
+
     override fun onCommand(sender: CommandSender, command: Command, label: String?, args: Array<String>): Boolean {
         if (!sender.hasPermission("uhc.command.pregen")) {
             sender.sendMessage("${ChatColor.RED}You don't have permission to use this command.")
@@ -50,7 +52,9 @@ class PregenCommand : CommandExecutor {
         Bukkit.broadcastMessage("${Main.prefix} Pregeneration started in ${ChatColor.WHITE}${args[0]}${ChatColor.GRAY}.")
 
         runActionBar()
-
+        settings.data!!.set("pregen.border", args[1])
+        settings.data!!.set("pregen.world", args[0])
+        settings.saveData()
 
         return true
     }
@@ -64,7 +68,7 @@ class PregenCommand : CommandExecutor {
                 }
             } else {
                 Bukkit.broadcastMessage("${Main.prefix} Pregeneration is now finished.")
-                return@breakout
+                Bukkit.getServer().scheduler.cancelTask(1)
             }
         }, 0, 1)
     }

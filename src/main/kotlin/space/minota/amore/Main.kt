@@ -26,6 +26,8 @@ class Main : JavaPlugin() {
         const val dash = "§8»"
         const val line = "§8§m-------------------------------------"
         var plugin: Main? = null
+        var world: String? = null
+        var border = 0
         var absorption = false
         var goldenheads = false
         var notchapples = false
@@ -59,6 +61,12 @@ class Main : JavaPlugin() {
         if (!settings.data!!.contains("game.options.goldenheads")) {
             settings.data!!.set("game.options.goldenheads", true)
         }
+        if (!settings.data!!.contains("pregen.world")) {
+            settings.data!!.set("pregen.world", null)
+        }
+        if (!settings.data!!.contains("pregen.border")) {
+            settings.data!!.set("pregen.border", 0)
+        }
 
         settings.saveData()
         absorption = settings.data!!.getBoolean("game.options.absorption")
@@ -66,6 +74,9 @@ class Main : JavaPlugin() {
         goldenheads = settings.data!!.getBoolean("game.options.goldenheads")
         ffa = settings.data!!.getBoolean("game.ffa")
         teamSize = settings.data!!.getInt("game.teamsize")
+
+        border = settings.data!!.getInt("pregen.border")
+        world = settings.data!!.getString("pregen.world")
 
         logger.info("Amore enabled!")
 
