@@ -1,5 +1,8 @@
 package space.minota.amore
 
+import com.mongodb.client.MongoClient
+import com.mongodb.client.MongoClients
+
 import org.bukkit.Bukkit
 import org.bukkit.inventory.Recipe
 import org.bukkit.plugin.java.JavaPlugin
@@ -38,6 +41,8 @@ class Main : JavaPlugin() {
 
     // Main funcs (funky)
     override fun onEnable() {
+
+        val mongoClient: MongoClient = MongoClients.create("mongodb://localhost:8000")
 
         settings.setup(this)
 

@@ -28,6 +28,8 @@ dependencies {
     compile 'net.dv8tion:JDA:4.2.0_196'
     compileOnly "org.bukkit:craftbukkit:1.8.8-R0.1-SNAPSHOT"
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
+    compile 'fr.minuskube:netherboard-bukkit:1.2.1'
+    compile 'org.mongodb:mongodb-driver-sync:4.1.0'
 }
 
 compileKotlin {
